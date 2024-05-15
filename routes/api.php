@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -16,15 +17,19 @@ use App\Http\Controllers\ApiController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::post('login', [ApiController::class, 'authenticate']);
 Route::post('register', [ApiController::class, 'register']);
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('logout', [ApiController::class, 'logout']);
     Route::get('getuser', [ApiController::class, 'get_user']);
+
+    Route::get('/markers', [HomeController::class, 'index']);
+    Route::get('/markers/{id}', [HomeController::class, 'show']);
+    Route::post('/markers', [HomeController::class, 'store']);
+    Route::put('/markers/{id}', [HomeController::class, 'update']);
+    Route::delete('/markers/{id}', [HomeController::class, 'destroy']);
+    Route::post('/markers/search', [HomeController::class, 'search']);
     /**
       * Silahkan tambahkan route anda disini ...
     */
