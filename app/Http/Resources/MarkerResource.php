@@ -8,7 +8,7 @@ class MarkerResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
-     *
+     * as
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
